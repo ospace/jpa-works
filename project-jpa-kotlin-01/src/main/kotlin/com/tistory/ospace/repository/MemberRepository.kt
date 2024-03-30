@@ -1,7 +1,7 @@
 package com.tistory.ospace.repository
 
+import com.tistory.ospace.repository.entity.Member
 import org.springframework.data.repository.CrudRepository
-import com.tistory.ospace.entity.Member
 
-interface MemberRepository : CrudRepository<Member, String> {
+interface MemberRepository : CrudRepository<Member, Long>{
 }

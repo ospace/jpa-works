@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Test</h1>
+<button onclick="onStep1()">POST</button> /
+<button onclick="onStep2()">GET</button>
+<input type="text" id="idGet" value="1" style="width:20px;"> /
+<button onclick="onStep3()">PUT</button>
+<input type="text" id="idPut" value="1" style="width:20px;"> /
+<button onclick="onStep4()">DELETE</button>
+<input type="text" id="idDelete" value="1" style="width:20px;">
+<script>
+function onStep1() {
+    fetch('/api/members', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{"name":"foo"}',
+    }).then(res=>
+        res.json()
+    ).then(json=>{
+        alert("Success: " + JSON.stringify(json));
+    }).catch(err=>{
+        alert("ERROR");
+    });
+}
+
+function onStep2() {
+    fetch(`/api/members/${idGet.value}`)
+    .then(res=>res.json())
+    .then(json=>{
+        alert(JSON.stringify(json));
+    }).catch(err=>{
+        alert("ERROR");
+    });
+}
+
+function onStep3() {
+    fetch(`/api/members/${idPut.value}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{"name":"bar"}',
+    }).then(res=>{
+        alert("Success!");
+    }).catch(err=>{
+        alert("ERROR");
+    });
+}
+
+function onStep4() {
+    fetch(`/api/members/${idDelete.value}`, {
+        method: 'DELETE',
+    }).then(res=>{
+        alert("Success!");
+    }).catch(err=>{
+        alert("ERROR");
+    });
+}
+</script>
+</body>
+</html>
